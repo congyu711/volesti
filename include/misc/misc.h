@@ -147,7 +147,7 @@ void read_pointset(std::istream &is,
 
     std::string point;
 
-    while(!std::getline(is, point, '\n').eof()) {
+    while(!std::getline(is, point, '\n').eof() && !is.fail()) {
         //std::cout<<point<<std::endl;
         if(!std::isdigit(point[0]) && point[0]!='-' && point[0]!=' ' && point[0]!='.')
             continue;

@@ -6,6 +6,7 @@
 # Contributed and/or modified by Vaibhav Thakkar
 # Contributed and/or modified by Ioannis Iakovidis
 # Licensed under GNU LGPL.3, see LICENCE file
+add_definitions(${CMAKE_CXX_FLAGS} "-Wno-psabi -Wno-macro-redefined -Wno-unused-command-line-argument")
 
 project( VolEsti )
 

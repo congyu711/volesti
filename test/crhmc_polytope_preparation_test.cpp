@@ -41,7 +41,7 @@ template <typename NT> void test_crhmc_polytope_preprocessing() {
 
   std::ifstream inp;
   std::vector<std::vector<NT>> Pin;
-  std::string fileName("../test/metabolic_full_dim/polytope_e_coli.ine");
+  std::string fileName("../metabolic_full_dim/polytope_e_coli.ine");
   inp.open(fileName, std::ifstream::in);
   read_pointset(inp, Pin);
   inp.close();
@@ -57,7 +57,7 @@ template <typename NT> void test_crhmc_polytope_preprocessing() {
   int m = 342;
   int n = 366;
   std::ifstream testdata;
-  std::string testDataFileName("../test/crhmc_polytope_test_output.txt");
+  std::string testDataFileName("../crhmc_polytope_test_output.txt");
   testdata.open(testDataFileName, std::ifstream::in);
   int size;
   testdata >> size;
