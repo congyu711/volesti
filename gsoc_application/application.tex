@@ -1,0 +1,187 @@
+\documentclass[11pt]{article}
+\usepackage{chao}
+\usepackage{float}
+\usepackage{url}
+\usepackage[ruled]{algorithm2e}
+
+\usepackage{listings}
+
+
+\DeclareMathOperator{\ch}{conv.hull}
+
+\title{GSoC24 CODING PROJECT PROPOSAL \\ Develop a new rounding method for convex polytopes}
+\author{Yu Cong}
+\begin{document}
+\maketitle
+\begin{abstract}
+    This proposal aims to develop a new rounding method for convex polytopes in the GeomScale project. 
+    
+    Rounding a convex polytope is crucial to improve the mixing rate of several MCMC methods that sample uniformly from the polytope. A standard method to round a convex polytope is to bring it to John position. This can be achieved by computing the maximum volume ellipsoid (MVE) of the polytope (or the John ellipsoid) and apply to it the transformation that maps the ellipsoid to the unit ball. The final polytope would be in John position.
+
+    An alternative method is to apply the fast transformation of the MVE problem in \cite{Khachiyan_Todd_1993} to compute the minimum volume enclosing ellipsoid (MVEE) of a set of points.
+\end{abstract}
+\tableofcontents
+
+\section{Project Information}
+\begin{table}[H]
+    \large
+    \begin{tabular}{l p{12cm}}
+        \textbf{Project title:} & Develop a new rounding method for convex polytopes\\ 
+        \textbf{Project short title:} & rounding convex polytope\\
+        \textbf{url:} & \url{https://github.com/GeomScale/gsoc24/wiki/Develop-a-new-rounding-method-for-convex-polytopes}\\
+    \end{tabular}%
+\end{table}
+
+\subsection{Motivation}
+The goal of this project is to provide a new rounding method for convex polytopes in \texttt{VolEsti} package. Rounding a polytope is important for Markov chain Monte Carlo methods that sample uniformly from the polytope. A key procedure of the traditional methods
+
+\note{a brief intro to the project. do some research. what i need to do. why do that.}
+\section{Biographical Information}
+\subsection*{Contact Information}
+
+\begin{table}[H]
+    \large
+    \begin{tabular}{l p{12cm}}
+    \textbf{Contributor name:} & Yu Cong\\ 
+    \textbf{Institution:} & University of Electronic Science and Technology of China\\
+    \textbf{Contributor postal address:} & Qingshuihe Campus:No.2006, Xiyuan Ave,\newline West Hi-Tech Zone, Chengdu 611731\\
+    \textbf{Telephone:} & \href{tel:+8618769199677}{ +86 187 6919 9677}\\
+    \textbf{Email:} & \href{mailto:yu.cong.143@gmail.com}{yu.cong.143@gmail.com}\\
+    \end{tabular}%
+\end{table}
+
+I am currently a 4th year undergraduate student at University of Electronic Science and Technology of China majoring in computer science. I will become a PhD student studying combinatorial optimization at the same school in September. I have research experiences in computational geometry which is important preliminary knowledge of this project. I implemented the $k$-level algorithm\footnote{code: \url{https://github.com/congyu711/k-level}, $k$-level alg: \url{https://tmc.web.engr.illinois.edu/pub_kset.html} Remarks on k-level algorithms in the plane} for finding the curve consisting of the points that lie on one of the lines and have exactly $k$ lines above them.
+
+This project requires reading papers on math programming and geometry and implementing algorithms in \texttt{C++}, which is exactly what I am insterested in and good at. I am familiar with \texttt{C++} and math softwares such as \texttt{sagemath}. I enjoy reading theoretical papers and implementing algorithms. For example I implemented pebble game algorithm\footnote{\url{https://gist.github.com/congyu711/7c783a54d82ecce1cedbdd227791ecd3}} for deciding graph sparsity in \texttt{sagemath} and lots of data structures in \texttt{C++}\footnote{for example, \url{https://gist.github.com/congyu711/bbe11fbdee17f34b7c30ece4ad62f5b4}}.
+
+I have a lot of free time during the summer since I will complete undergraduate studies before July and start my PhD program in September. Thus I can trate GSoC as a full-time job and concentrate on it.
+
+\section{Mentors}
+\begin{table}[H]
+    \large
+    \begin{tabular}{l p{12cm}}
+    \textbf{Main mentor name:} & Vissarion Fisikopoulos \\ 
+    \textbf{Main mentor email:} & \href{mailto:vissarion.fisikopoulos@gmail.com}{vissarion.fisikopoulos@gmail.com}\\
+    \textbf{Co-mentor name:} & Apostolos Chalkis \\ 
+    \textbf{Co-mentor email:} & \href{mailto:tolis.chal@gmail.com}{tolis.chal@gmail.com}\\
+    \end{tabular}%
+\end{table}
+I have been in touch with mentors through emails since March 26th.
+\section{Coding Plan and Methods}
+\note{seems to be important}
+\section{Timeline}
+\subsection{Schedule Conflicts}
+    GSoC will become my full-time job from July 10th to August 30th. Maybe I need to attend a conference from August 3rd to August 9th(this will be settled on April 16th). Before July 10th I will trate GSoC as a part-time job and report my progress weekly.
+\section{Management of Coding Project}
+\note{How do you propose to ensure code is submitted and tested?
+How often do you plan to commit? What changes in commit behavior would indicate a problem?}
+\section{Tests}
+% \note{Describe the qualification test that you have submitted to you project mentors. If feasible, include code, details, output, and example of similar coding problems that you have solved.}
+\subsection{Compile and run volesti library. Run the rounding routines.}
+
+Compile with \texttt{test/CMakeLists.txt} and run \texttt{new\_rounding\_test}.
+
+\begin{lstlisting}
+    [doctest] doctest version is "2.4.9"
+    [doctest] run with "--help" for options
+    use MVEE
+    
+    --- Testing rounding of H-skinny_cube5
+    Number type: d
+    Computed volume 3071.67
+    Expected volume = 3070.64
+    Relative error (expected) = 0.000336825
+    Relative error (exact) = 0.0401018
+    Computed volume 3129.59
+    Expected volume = 3188.25
+    Relative error (expected) = 0.0183995
+    Relative error (exact) = 0.0220038
+    Computed volume 3163.97
+    Expected volume = 3140.6
+    Relative error (expected) = 0.00744021
+    Relative error (exact) = 0.0112604
+    
+    --- Testing rounding of H-skinny_cube10
+    Number type: d
+    Computed volume 102149
+    Expected volume = 122550
+    Relative error (expected) = 0.166472
+    Relative error (exact) = 0.00245223
+    Computed volume 93610.8
+    Expected volume = 108426
+    Relative error (expected) = 0.136638
+    Relative error (exact) = 0.0858316
+    Computed volume 97672.9
+    Expected volume = 105003
+    Relative error (expected) = 0.0698087
+    Relative error (exact) = 0.0461633
+    use MVIE
+    
+    --- Testing rounding of H-skinny_cube5
+    Number type: d
+    Computed volume 3262.77
+    Expected volume = 3140.6
+    Relative error (expected) = 0.0388998
+    Relative error (exact) = 0.0196153
+    
+    --- Testing rounding of H-skinny_cube5
+    Number type: d
+    Computed volume 3160.01
+    Expected volume = 3140.6
+    Relative error (expected) = 0.00617984
+    Relative error (exact) = 0.0124974
+    ========================================================
+    [doctest] test cases: 3 | 3 passed | 0 failed | 0 skipped
+    [doctest] assertions: 8 | 8 passed | 0 failed |
+    [doctest] Status: SUCCESS!
+\end{lstlisting}
+
+\subsection{Compare the existing roudning C++ implementation in volesti that solves the MVEE problem of a uniformly distributed sample inside the polytope with PolyRound.}
+\subsection{Write a pseudocode of the transformation between MVE and MVEE problem.}
+
+For simplicity we assume the polytope always contains the origin as an interior point.
+\begin{problem}[maximum volume inscribed ellipsoid (MVIE)]\label{prob:mvie}
+Given a full-dimensional polytope $Q$ in $\R^n$ defined by linear inequalities, 
+\[Q=\{x\in \R^n | c_i^Tx\leq 1, i\in [m]\}\]
+find a ellipsoid of maximum volume inscribed in $Q$.
+\end{problem}
+\begin{problem}[minimum volume enclosing ellipsoid (MVEE)]\label{prob:mvee}
+Given a full-dimensional polytope $Q$ in $\R^n$ defined by convex hull of $m$ points in $\R^n$, 
+\[Q=\ch\{x_1,\ldots,x_m\}\]
+find a ellipsoid of minimum volume circumscribed about $Q$.
+\end{problem}
+
+% Consider the following two variations of MVIE and MVEE.
+% \begin{problem}[centered version of \autoref{prob:mvie} (MVIE0)]
+% MVIE with an additional constraint that the ellipsoid is centered at the origin.
+% \end{problem}
+% \begin{problem}[centered version of \autoref{prob:mvee} (MVEE0)]
+% MVEE with an additional constraint that the ellipsoid is centered at the origin.
+% \end{problem}
+
+Note that MVIE can be used to solve MVEE. The transformation is the following,
+
+\begin{algorithm}[H]
+\SetKwComment{Comment}{/* }{ */}
+\SetKwInOut{input}{Input}
+\SetKwInOut{output}{Output}
+\caption{reduce MVEE to MVIE}\label{alg:reduction}
+\input{$n$ dimensional polytope $Q=\ch\{v_1,\ldots,v_m\}$}
+\output{the minimum volume enclosing ellipsoid of $Q$}
+\Comment{MVEE $\rightarrow$ centered MVEE}
+Add a new dimension, $Q\gets \ch\{\pm(v_1,1),\ldots,\pm(v_m,1)\}$\;
+\Comment{centered MVEE $\rightarrow$ centered MVIE}
+$Q'\gets \{x\in \R^{n+1}|e^T\cdot x\leq 1, \forall e\in Q\}$\;
+\Comment{centered MVIE $\rightarrow$ MVIE}
+$Q''\gets \{x\in \R^{n+1}|\pm e^T\cdot x\leq 1, \forall e\in Q\}$\;
+$E=\text{MVIE}(Q'')$  \Comment*[r]{$E$ is the solution to MVIE and centered MVIE}
+\Comment{solution to centered MVIE $\rightarrow$ solution to centered MVEE}
+$E'\gets$ the polar of $E$\;
+\Comment{solution to centered MVEE $\rightarrow$ solution to MVEE}
+$E''$ is the intersection of $E'$ with the hyperplane $\{x\in \R^{n+1}| x_{n+1}=1\}$\;
+\KwRet{$E''$}
+\end{algorithm}
+
+\bibliographystyle{plain}
+\bibliography{cited}
+\end{document}
