@@ -33,9 +33,9 @@
 \end{table}
 
 \subsection{Motivation}
-The goal of this project is to provide a new rounding method for convex polytopes in \texttt{VolEsti} package. Rounding a polytope is important for Markov chain Monte Carlo methods that sample uniformly from the polytope. A key procedure of the traditional methods
-
-\note{a brief intro to the project. do some research. what i need to do. why do that.}
+The goal of this project is to provide a new rounding method for convex polytopes in \texttt{VolEsti} package. Rounding a polytope is important for Markov chain Monte Carlo methods that sample uniformly from the polytope. A key procedure of the traditional methods is computing the maximum volume inscribed ellipsoid(MVIE) of the polytope.
+Currently there are 3 rounding method for convex polytopes, svd rounding, MVIE rounding and MVEE(minimum volume enclosing ellipsoid) rounding in \texttt{VolEsti} package. The MVIE rounding method is an implementation of the algorithm descirbed in \cite{Zhang_Gao_2003} and seems to be not efficient enough. The MVEE rounding method randomly samples points on the polytope and uses the Khachiyan's Algorithm\cite{Khachiyan_1996} to compute the MVEE. This method also leads to low efficiency. It would greatly optimize the polytope rounding procedure of \texttt{VolEsti} if we can implement a new efficient method for computing MVIE.
+% \note{a brief intro to the project. do some research. what i need to do. why do that.}
 \section{Biographical Information}
 \subsection*{Contact Information}
 
@@ -68,13 +68,12 @@ I have a lot of free time during the summer since I will complete undergraduate 
 \end{table}
 I have been in touch with mentors through emails since March 26th.
 \section{Coding Plan and Methods}
-\note{seems to be important}
+\note{I havn't develop a coding plan yet.}
 \section{Timeline}
 \subsection{Schedule Conflicts}
     GSoC will become my full-time job from July 10th to August 30th. Maybe I need to attend a conference from August 3rd to August 9th(this will be settled on April 16th). Before July 10th I will trate GSoC as a part-time job and report my progress weekly.
 \section{Management of Coding Project}
-\note{How do you propose to ensure code is submitted and tested?
-How often do you plan to commit? What changes in commit behavior would indicate a problem?}
+\note{I havn't develop a coding plan yet.}
 \section{Tests}
 % \note{Describe the qualification test that you have submitted to you project mentors. If feasible, include code, details, output, and example of similar coding problems that you have solved.}
 \subsection{Compile and run volesti library. Run the rounding routines.}
@@ -168,20 +167,21 @@ Note that MVIE can be used to solve MVEE. The transformation is the following,
 \caption{reduce MVEE to MVIE}\label{alg:reduction}
 \input{$n$ dimensional polytope $Q=\ch\{v_1,\ldots,v_m\}$}
 \output{the minimum volume enclosing ellipsoid of $Q$}
-\Comment{MVEE $\rightarrow$ centered MVEE}
+\Comment{MVEE $\to$ centered MVEE}
 Add a new dimension, $Q\gets \ch\{\pm(v_1,1),\ldots,\pm(v_m,1)\}$\;
-\Comment{centered MVEE $\rightarrow$ centered MVIE}
+\Comment{centered MVEE $\to$ centered MVIE}
 $Q'\gets \{x\in \R^{n+1}|e^T\cdot x\leq 1, \forall e\in Q\}$\;
-\Comment{centered MVIE $\rightarrow$ MVIE}
+\Comment{centered MVIE $\to$ MVIE}
 $Q''\gets \{x\in \R^{n+1}|\pm e^T\cdot x\leq 1, \forall e\in Q\}$\;
 $E=\text{MVIE}(Q'')$  \Comment*[r]{$E$ is the solution to MVIE and centered MVIE}
-\Comment{solution to centered MVIE $\rightarrow$ solution to centered MVEE}
+\Comment{solution to centered MVIE $\to$ solution to centered MVEE}
 $E'\gets$ the polar of $E$\;
-\Comment{solution to centered MVEE $\rightarrow$ solution to MVEE}
+\Comment{solution to centered MVEE $\to$ solution to MVEE}
 $E''$ is the intersection of $E'$ with the hyperplane $\{x\in \R^{n+1}| x_{n+1}=1\}$\;
 \KwRet{$E''$}
 \end{algorithm}
 
+However the inverse transformation is not known. In \cite{Khachiyan_Todd_1993} there is an explaination. Centered MVIE can be solved through MVIE but the general MVIE can not be solve through centered MVIE. Besides this step, the inverse of every transformation in \autoref{alg:reduction} exists. So currently it is not possible to solve MVIE by using some algorithm for MVEE.
 \bibliographystyle{plain}
 \bibliography{cited}
 \end{document}

@@ -28,19 +28,19 @@ rounded_polytope = PolyRoundApi.round_polytope(transformed_polytope)
 x, dist = ChebyshevFinder.chebyshev_center(rounded_polytope, settings)
 print(dist)
 
-# The chebyshev center can be back transformed into an interior point in the simplified space.
-print(simplified_polytope.border_distance(rounded_polytope.back_transform(x)))
-# simplify, transform and round in one call
-one_step_rounded_polytope = PolyRoundApi.simplify_transform_and_round(polytope)
-# save to csv
-out_csv_dir = os.path.join("PolyRound", "output", "e_coli_core")
-Path(out_csv_dir).mkdir(parents=True, exist_ok=True)
-PolyRoundApi.polytope_to_csvs(one_step_rounded_polytope, out_csv_dir)
-# Special use case: remove redundant constraints without removing zero facettes. This will leave th polytope with its original border distance.
-x, dist = ChebyshevFinder.chebyshev_center(polytope, settings)
-print(dist)
-settings.simplify_only = True
-simplified_polytope = PolyRoundApi.simplify_polytope(polytope, settings=settings)
-# The simplified polytope still has zero border distance
-x, dist = ChebyshevFinder.chebyshev_center(simplified_polytope, settings)
-print(dist)
+# # The chebyshev center can be back transformed into an interior point in the simplified space.
+# print(simplified_polytope.border_distance(rounded_polytope.back_transform(x)))
+# # simplify, transform and round in one call
+# one_step_rounded_polytope = PolyRoundApi.simplify_transform_and_round(polytope)
+# # save to csv
+# out_csv_dir = os.path.join("PolyRound", "output", "e_coli_core")
+# Path(out_csv_dir).mkdir(parents=True, exist_ok=True)
+# PolyRoundApi.polytope_to_csvs(one_step_rounded_polytope, out_csv_dir)
+# # Special use case: remove redundant constraints without removing zero facettes. This will leave the polytope with its original border distance.
+# x, dist = ChebyshevFinder.chebyshev_center(polytope, settings)
+# print(dist)
+# settings.simplify_only = True
+# simplified_polytope = PolyRoundApi.simplify_polytope(polytope, settings=settings)
+# # The simplified polytope still has zero border distance
+# x, dist = ChebyshevFinder.chebyshev_center(simplified_polytope, settings)
+# print(dist)

@@ -1,0 +1,18 @@
+\begin{thebibliography}{1}
+
+\bibitem{Khachiyan_1996}
+Leonid~G. Khachiyan.
+\newblock Rounding of polytopes in the real number model of computation.
+\newblock {\em Mathematics of Operations Research}, 21(2):307–320, May 1996.
+
+\bibitem{Khachiyan_Todd_1993}
+Leonid~G. Khachiyan and Michael~J. Todd.
+\newblock On the complexity of approximating the maximal inscribed ellipsoid for a polytope.
+\newblock {\em Mathematical Programming}, 61(1–3):137–159, August 1993.
+
+\bibitem{Zhang_Gao_2003}
+Yin Zhang and Liyan Gao.
+\newblock On numerical solution of the maximum volume ellipsoid problem.
+\newblock {\em SIAM Journal on Optimization}, 14(1):53–76, January 2003.
+
+\end{thebibliography}

@@ -1,0 +1,12 @@
+\contentsline {section}{\numberline {1}Project Information}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Motivation}{2}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Biographical Information}{2}{section.2}%
+\contentsline {section}{\numberline {3}Mentors}{3}{section.3}%
+\contentsline {section}{\numberline {4}Coding Plan and Methods}{3}{section.4}%
+\contentsline {section}{\numberline {5}Timeline}{3}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Schedule Conflicts}{3}{subsection.5.1}%
+\contentsline {section}{\numberline {6}Management of Coding Project}{3}{section.6}%
+\contentsline {section}{\numberline {7}Tests}{3}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Compile and run volesti library. Run the rounding routines.}{3}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Compare the existing roudning C++ implementation in volesti that solves the MVEE problem of a uniformly distributed sample inside the polytope with PolyRound.}{4}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Write a pseudocode of the transformation between MVE and MVEE problem.}{4}{subsection.7.3}%
